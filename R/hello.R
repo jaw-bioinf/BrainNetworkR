@@ -28,3 +28,21 @@ hello <- function() {
 # XGR
 # ontologyIndex, etc
 # and more stuff
+
+library(WGCNA)
+library(magrittr)
+library(reticulate)
+zipfile <- import("zipfile")
+pyArr <- import("array")
+zf = zipfile$ZipFile("/Users/j.williams/Desktop/Dummy/gridAnnotation.raw")
+
+raw = zipfile.Zipfile('gridAnnotation.mhd')
+arr = array.array('H',raw)
+
+library(SimpleITK)
+raw <- SimpleITK::ReadImage("/Users/j.williams/Desktop/Dummy/gridAnnotation.mhd") %>% SimpleITK::as.array(.) %>% as.vector()
+raw2 <- SimpleITK::ReadImage("/Users/j.williams/Desktop/Dummy/gridAnnotation.mhd")
+raw2 <- raw2 %>% SimpleITK::as.array()
+scatterplot3d::scatterplot3d(raw2[1:67,,],raw2[,1:41,],raw2[,,1:58])
+
+### yay plotitg workds
